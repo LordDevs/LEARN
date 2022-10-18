@@ -14,8 +14,8 @@ Projetos meramente academicos para aprendizado durante o curso de desenvolviment
 </div>
 
 
-<div style="display: inline-block" align="center"><br>    
-  <img align="center" alt="Lord-Js" height="30" width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" />
+<div style="display: inline-block" align="center"><br>
+  <img align="center" alt="Lord-Js" height="30" width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"/>
   <img align="center" alt="Lord-Js" height="30" width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" />
   <img align="center" alt="Lord-Js" height="30" width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" />         <img align="center" alt="Lord-Js" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" />
   <img align="center" alt="Lord-Js" height="30" width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" />  
