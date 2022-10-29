@@ -2,7 +2,7 @@
 Projetos meramente academicos para aprendizado durante o curso de desenvolvimento web
 ##Ola! Sou Michel Souza Lopes
 
-🛠 Estudante de desenvolvimento novas tecnologias<br>
+🛠 Estudante de desenvolvimento e novas tecnologias<br>
 🎓 Estudando: HTML5, CSS3, SASS, Bootstrap, JS, ES6, PHP 7, OO, MySQL, JQuery, MVC, APIs, IONIC.</div><br>
 📧 Contate-me no e-mail: michel_wolf@hotmail.com<br>
 
