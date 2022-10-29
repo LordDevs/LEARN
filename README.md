@@ -5,7 +5,7 @@ Projetos meramente academicos para aprendizado durante o curso de desenvolviment
 🛠 Hoje estou trabalhando na area administrativa.<br>
 🎓 Estudando: HTML5, CSS3, SASS, Bootstrap, JS, ES6, PHP 7, OO, MySQL, JQuery, MVC, APIs, IONIC.</div><br>
 📧 Contate-me no e-mail: michel_wolf@hotmail.com<br>
-😀 Pronouns: Ele/Dele.
+
 
 <div align="center">
   <a href="https://github.com/LordDevs">
