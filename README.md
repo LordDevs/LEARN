@@ -1,5 +1,5 @@
 # Projetos
-Projetos meramente academicos para aprendizado durante o curso de desenvolvimento web
+Projetos meramente academicos para aprendizado durante o curso de desenvolvimento web<br>
 ##Ola! Sou Michel Souza Lopes
 
 🛠 Estudante de desenvolvimento e novas tecnologias<br>
