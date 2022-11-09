@@ -1,4 +1,4 @@
-# Projetos
+# Learning projects
 Projetos meramente academicos para aprendizado durante o curso de desenvolvimento web<br>
 ##Ola! Sou Michel Souza Lopes
 
