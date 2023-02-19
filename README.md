@@ -30,10 +30,10 @@ Projetos meramente academicos para aprendizado durante o curso de desenvolviment
   <img align="center" alt="Lord-Js" height="30" width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg" />
   <img align="center" alt="Lord-Js" height="30" width="50" src="https://www.vectorlogo.zone/logos/mariadb/mariadb-ar21.svg"<br>
           
-  
+  <div>
   ##
-  
-  <div> 
+
+  <div>
   
   <a href="https://instagram.com/michel.souzal" target="_blank"><img src="https://img.shields.io/badge/-Instagram-%23E4405F?style=for-the-badge&logo=instagram&logoColor=white" target="_blank"></a> 
   <a href = "mailto:contatomichel.lordalbinus@gmail.com"><img src="https://img.shields.io/badge/-Gmail-%23333?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
