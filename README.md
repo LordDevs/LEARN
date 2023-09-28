@@ -1,4 +1,4 @@
-# Projetos-xamp
+# Projects
 Projetos meramente academicos para aprendizado durante o curso de desenvolvimento web
 ##Ola! Sou Michel Souza Lopes
 
