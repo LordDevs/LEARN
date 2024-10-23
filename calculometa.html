@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtividade</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        input, button {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+        }
+        canvas {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Cálculo de Produtividade</h1>
+
+    <label for="func1">Produção da Glacy:</label>
+    <input type="number" id="func1" placeholder="Digite a produção">
+
+    <label for="func2">Produção da Thatiana:</label>
+    <input type="number" id="func2" placeholder="Digite a produção">
+
+    <label for="func3">Produção da Viviane:</label>
+    <input type="number" id="func3" placeholder="Digite a produção">
+
+    <label for="esposa">Produção da Esposa:</label>
+    <input type="number" id="esposa" placeholder="Digite a produção da esposa">
+
+    <button onclick="calcularMeta()">Calcular Meta</button>
+
+    <div class="result" id="resultado"></div>
+    <canvas id="graficoProdutividade" width="400" height="200"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    let chart; // Variável para armazenar a instância do gráfico
+
+    function calcularMeta() {
+        let func1 = parseFloat(document.getElementById('func1').value);
+        let func2 = parseFloat(document.getElementById('func2').value);
+        let func3 = parseFloat(document.getElementById('func3').value);
+        let producaoEsposa = parseFloat(document.getElementById('esposa').value);
+
+        if (isNaN(func1) || isNaN(func2) || isNaN(func3) || isNaN(producaoEsposa)) {
+            alert('Por favor, preencha todos os campos corretamente.');
+            return;
+        }
+
+        // Calculando a média das outras funcionárias
+        let mediaOutras = (func1 + func2 + func3 + producaoEsposa) / 4;
+
+        // Calculando a meta da esposa com 20% a mais
+        let metaEsposa = mediaOutras * 1.2;
+
+        // Calculando a diferença entre a produção da esposa e a meta
+        let diferenca = metaEsposa - producaoEsposa;
+
+        // Percentual atingido pela esposa
+        let atingido = (producaoEsposa / metaEsposa) * 100;
+
+        // Determinando o status
+        let status = atingido >= 100 ? "Meta Atingida" : "Meta Não Atingida";
+
+        // Exibindo os resultados
+        let resultadoHTML = `
+            <p>Média de produção das colegas: <strong>${mediaOutras.toFixed(2)}</strong></p>
+            <p>Meta da esposa (20% a mais): <strong>${metaEsposa.toFixed(2)}</strong></p>
+            <p>Diferença: <strong>${diferenca.toFixed(2)}</strong></p>
+            <p>Percentual Atingido: <strong>${atingido.toFixed(2)}%</strong></p>
+            <p>Status: <strong>${status}</strong></p>
+        `;
+        document.getElementById('resultado').innerHTML = resultadoHTML;
+
+        // Atualizando o gráfico
+        if (chart) {
+            // Se o gráfico já existe, atualizamos os dados
+            chart.data.datasets[0].data = [func1, func2, func3, producaoEsposa, metaEsposa];
+            chart.update(); // Atualiza o gráfico
+        } else {
+            // Se o gráfico não existe, criamos um novo
+            const ctx = document.getElementById('graficoProdutividade').getContext('2d');
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Glacy', 'Thatiana', 'Viviane', 'Esposa', 'Meta da Esposa'],
+                    datasets: [{
+                        label: 'Produção',
+                        data: [func1, func2, func3, producaoEsposa, metaEsposa],
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    }
+</script>
+
+</body>
+</html>
