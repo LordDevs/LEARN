@@ -1,0 +1,78 @@
+Schedule Hillbillys
+Escala Hillbillys is a scheduling, clock-in, and employee management system developed for small and medium-sized food service operations. It enables automation of shift creation, work hours registration, delay justification, metric analysis, and legal data management of employees. The application was written in PHP with SQLite to facilitate deployment in simple environments but can be adapted for more robust databases as the company grows.
+Main Features
+•	Employee Registration – records personal data (name, phone, email), Irish legal documents (PPSN and IRP), hourly wage, and store location. It is possible to define whether the employee will have portal access (employee profile) or manager panel.
+•	Store Management – administrators can create and edit stores; managers only have access to their linked store. Each employee belongs to a store.
+•	Time Clock Control – records employee clock-in and clock-out times, with options for managers to correct entries (with justification). It calculates worked hours and allows CSV export.
+•	Manual and Automatic Scheduling – allows creating shifts manually or generating schedules automatically for a date range. The automatic algorithm respects employee availability preferences, avoids overlapping shifts on the same day, and distributes hours equitably.
+•	Schedule Suggestions (AI/Heuristic) – generates shift suggestions based on hours worked in recent days and availability preferences. Administrators can review and apply these suggestions.
+•	Availability Preferences – each employee sets, via the portal, their available days and times. These preferences are considered in schedule generation and suggestions.
+•	Interactive Calendar – monthly/weekly view of shifts using FullCalendar. Administrators and managers can create, edit, drag, resize, and delete shifts directly on the calendar, with permission validation, preferences, and duplication checks.
+•	Dashboards and Reports – dashboards display metrics such as number of employees, upcoming shifts, hours worked, overtime, and comparisons between scheduled and actual hours. Charts in Chart.js facilitate data interpretation.
+•	Data Export – employee data, schedules, and clock-in records can be exported in CSV format for external analysis or integration with other tools.
+Installation
+1.	Prerequisites: PHP 7.4 or higher with PDO-SQLite extension enabled.
+2.	Web server such as Apache, Nginx, or PHP's built-in server.
+3.	The application stores data in a db.sqlite file within the project directory; ensure writing permissions.
+4.	Unzip the files: download the ZIP package of the project and extract the files into a directory accessible by the web server (e.g., /var/www/escala_hillbillys).
+5.	Database configuration: the config.php file contains the initDatabase() function that automatically creates the database and necessary tables on first run. No manual SQL scripts are needed.
+6.	Running:
+With embedded server: navigate to the project directory and run:
+php -S localhost:8000
+Then access http://localhost:8000 via browser.
+2.	With Apache/Nginx: configure the virtual host pointing to the project directory and ensure PHP is properly configured.
+3.	Initial credentials: upon first startup, the system creates a default admin user:
+Username: admin
+Password: admin
+It is recommended to change the password after the first login (by editing the database directly or adding a new admin user).
+Usage
+1.	Login – access the application with admin or manager credentials. Registered employees with login are directed to the employee portal, where they can view their schedules, clock in, and set availability preferences.
+2.	Employee Registration – in the Employees menu, click “New Employee” to fill in personal data, documents (PPSN/IRP), salary, and store. Check the option to create login to enable portal access. Administrators can choose account type (employee or manager); managers can only create employees.
+3.	Availability Preferences – each employee, upon accessing the portal, finds the Preferences menu to indicate available times for each day of the week. These settings are respected in automatic schedule generation and suggestions.
+4.	Creating Schedules:
+Manual: in the Schedules menu, click “New Schedule” and select date, time, and employees. The system validates overlaps and preferences.
+Automatic: on the same page, click “Generate Automatically,” select dates and times. The algorithm distributes shifts equitably and checks preferences. If an employee already has a shift on the same day, they are skipped. Administrators can generate schedules for all stores; managers only for their store.
+Suggestions (AI): the “AI Suggestion” option uses recent hours worked and preferences to propose shifts. Suggestions can be directly applied to the database.
+2.	Interactive Calendar: access Calendar from the menu to view, create, and edit shifts graphically. Select a day or range to open the creation modal; drag or resize existing shifts to modify them; click a shift to edit or delete.
+3.	Clock-in Control – employees record entry and exit via the portal. Managers can correct records (with justification) in the Points menu.
+4.	Reports and Metrics – menus Reports, Performance, and Metrics display graphs of hours worked, overtime, distribution by weekday, and comparisons between scheduled and actual hours.
+5.	Export – use the “Export CSV” buttons in employee, schedule, and clock-in lists to generate CSV files.
+File Structure
+├── config.php # connection settings and database creation
+├── index.php # homepage/login
+├── dashboard.php # main admin panel
+├── manager_dashboard.php # manager panel
+├── usuarios_listar.php # employee listing
+├── usuario_criar.php # employee creation form
+├── usuario_editar.php # employee editing
+├── escala_listar.php # schedule listing (tables and calendar button)
+├── escala_criar.php # schedule creation and automatic generation
+├── escala_calendario.php # schedule view and editing via FullCalendar
+├── create_shift.php # AJAX endpoint to create shift via calendar
+├── update_shift.php # AJAX endpoint to edit shift via calendar
+├── delete_shift.php # AJAX endpoint to delete shift via calendar
+├── ponto_listar.php # clock-in/out listing
+├── ponto_corrigir.php # clock-in correction with justification
+├── relatorios.php # reports (charts of overtime, etc.)
+├── desempenho.php # employee performance panel
+├── analytics.php # advanced metrics (hours comparison by day and employee)
+├── preferencias.php # employee availability preferences portal
+├── portal.php # employee portal (schedule, hours worked, earnings)
+├── loja_gerenciar.php # store management (name, location)
+├── cronjobs/ # (optional) maintenance or notification scripts
+└── ... (other resource files and folders: CSS, JS, images)
+Future Goals
+The project is structured with goals to guide ongoing development:
+1. Interactive Calendar – completed; allows creation/editing of shifts with drag, resize, and modal.
+2. Notifications and Reminders – implement email or SMS notifications when schedules are created or modified.
+3. Advanced Metrics – expand the analytics dashboard with indicators of absenteeism, seasonality, and cost comparison.
+4. Skills Module – associate certifications/competencies with employees to direct schedules based on business needs.
+5. Progressive Web App (PWA) – enable installation on mobile devices and basic offline use.
+6. Optimization and Forecasting Algorithms – integrate machine learning or linear programming models to predict demand and optimize schedules.
+Contribution and Customization
+· To customize appearance, adjust style files (CSS) or replace Bootstrap theme. Icons and animations can be added with Font Awesome or Animate.css.
+· To integrate AI modules, it is recommended to create microservices in Python (e.g., using Flask) exposing REST APIs; PHP consumes these services and displays results in the interface.
+· Migrating the database from SQLite to MySQL or PostgreSQL is possible by changing the connection string in config.php and adjusting SQL syntax as needed.
+License
+This application is distributed for educational and internal purposes. Adjust the license according to your organization's policies.
+________________________________________
