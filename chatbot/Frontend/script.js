@@ -164,3 +164,4 @@ document.addEventListener("DOMContentLoaded", () => {
         applyMinDate(); // Apply the minimum date to the new input field
       }
     });
+});
