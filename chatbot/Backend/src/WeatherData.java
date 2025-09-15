@@ -109,7 +109,7 @@ public class WeatherData {
         }else if(temperature < 20 && temperature > 10){
             return String.format("%.2f°C. Mild day, %s.<br>You should consider bringing a coat 🧥",temperature, description);
         }else {
-            return String.format("%.2f°C. Cold day, %s.<br>You should <strong>definitely</strong> bring a coat🧥",temperature, description);
+            return String.format("%.2f°C. Cold day, %s.<br>You should <strong>definitely</strong> bring a coat🧥", temperature, description);
         }
     }
 
