@@ -1,24 +1,22 @@
 <?php
+require_once __DIR__ . '/validador_acesso.php';
+require_once __DIR__ . '/includes/ticket_repository.php';
 
-	session_start();
+if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') {
+    header('Location: abrir_chamado.php');
+    exit;
+}
 
-	//estamos trabalhando na montagem do texto
-	$titulo = str_replace('#', '-', $_POST['titulo']);
-	$categoria = str_replace('#', '-', $_POST['categoria']);
-	$descricao = str_replace('#', '-', $_POST['descricao']);
+try {
+    ticket_create($_POST, (int) ($_SESSION['id'] ?? 0));
+    $_SESSION['flash_message'] = 'Chamado criado com sucesso!';
+    header('Location: consultar_chamado.php');
+    exit;
+} catch (InvalidArgumentException $exception) {
+    $_SESSION['flash_message'] = $exception->getMessage();
+} catch (Throwable $exception) {
+    $_SESSION['flash_message'] = 'Não foi possível registrar o chamado. Tente novamente.';
+}
 
-	//implode('#', $_POST);
-
-	$texto = $_SESSION['id'] . '#' . $titulo . '#' . $categoria . '#' . $descricao . PHP_EOL;
-
-
-	//abrindo o arquivo
-	$arquivo = fopen('../../app_help_desk/arquivo.hd', 'a');
-	//escrevendo o texto
-	fwrite($arquivo, $texto);
-	//fechando o arquivo
-	fclose($arquivo);
-
-	//echo $texto;
-	header('Location: abrir_chamado.php');
-?>
+header('Location: abrir_chamado.php');
+exit;

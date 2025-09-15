@@ -1,0 +1,124 @@
+:root {
+  --brand-primary: #4a6cf7;
+  --brand-primary-dark: #1b3fcc;
+  --brand-accent: #f59e0b;
+  --brand-surface: #f5f7fb;
+  --brand-text: #1f2937;
+  --brand-muted: #6b7280;
+  --brand-border: rgba(15, 23, 42, 0.08);
+  --brand-radius: 1rem;
+  --font-family-base: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  background-color: var(--brand-surface);
+  color: var(--brand-text);
+  font-family: var(--font-family-base);
+  letter-spacing: -0.01em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.navbar {
+  border-bottom: 1px solid transparent;
+}
+
+.navbar-brand img {
+  max-height: 32px;
+}
+
+.app-card {
+  border-radius: var(--brand-radius);
+  border: 1px solid var(--brand-border);
+  box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.08);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-primary-dark));
+  border-color: transparent;
+  box-shadow: 0 0.625rem 1.5rem rgba(74, 108, 247, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background: linear-gradient(135deg, var(--brand-primary-dark), var(--brand-primary));
+  transform: translateY(-1px);
+  box-shadow: 0 1rem 2.5rem rgba(27, 63, 204, 0.35);
+}
+
+.btn-outline-secondary {
+  border-radius: 999px;
+}
+
+.badge-soft {
+  background-color: rgba(74, 108, 247, 0.1);
+  color: var(--brand-primary);
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+.text-muted {
+  color: var(--brand-muted) !important;
+}
+
+.bg-surface {
+  background-color: var(--brand-surface);
+}
+
+.toast.text-bg-success {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+}
+
+.toast.text-bg-danger {
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+}
+
+.toast.text-bg-warning {
+  background: linear-gradient(135deg, #ea580c, #f97316);
+}
+
+.card {
+  border-radius: var(--brand-radius);
+  border: 1px solid var(--brand-border);
+  box-shadow: 0 1.5rem 3rem rgba(15, 23, 42, 0.12);
+}
+
+.card-header {
+  background-color: rgba(74, 108, 247, 0.05);
+  border-bottom: 1px solid var(--brand-border);
+}
+
+.form-control,
+.form-select {
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-color: rgba(148, 163, 184, 0.4);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 0.2rem rgba(74, 108, 247, 0.25);
+}
+
+.link-muted {
+  color: var(--brand-muted);
+}
+
+.link-muted:hover {
+  color: var(--brand-primary);
+}
+
+.shadow-soft {
+  box-shadow: 0 1.25rem 2.5rem rgba(15, 23, 42, 0.15);
+}
+
+@media (max-width: 575.98px) {
+  .navbar-brand span {
+    display: none;
+  }
+}
