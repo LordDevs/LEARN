@@ -13,8 +13,9 @@ fi
 # Compile all Java files
 echo "Compiling Java files..."
 CLASSPATH="./Backend/lib/*"
-javac -cp "$CLASSPATH" ./Backend/src/*.java -d ./Backend/bin
+SOURCES=$(find ./Backend/src -name "*.java")
+javac -cp "$CLASSPATH" $SOURCES -d ./Backend/bin
 
 # Run server
 echo "Starting Tomcat server..."
-java -cp "./Backend/bin:$CLASSPATH" ServletMain
+java -cp "./Backend/bin:$CLASSPATH" com.chatbot.ServletMain

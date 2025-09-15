@@ -1,3 +1,5 @@
+package com.chatbot;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.alicebot.ab.*;
