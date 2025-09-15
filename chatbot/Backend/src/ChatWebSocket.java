@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.alicebot.ab.*;
 
 import jakarta.websocket.*;
@@ -7,6 +9,8 @@ import jakarta.websocket.server.ServerEndpoint;
 @ServerEndpoint("/chat")
 public class ChatWebSocket{
 
+    private static final Logger LOGGER = Logger.getLogger(ChatWebSocket.class.getName());
+
     private Bot bot;
     private Chat chat;
     private MessageHandler msgHND;
@@ -14,9 +18,7 @@ public class ChatWebSocket{
     //////////////////////////////////////////////////////// WEB SOCKET HANDLING ////////////////////////////////////////////////////////
     @OnOpen
     public void onOpen(Session session){
-        System.out.println("\n" + "#".repeat(24));
-        System.out.println("NEW WEBSOCKET ESTABLISHED. ID: " + session.getId());
-        System.out.println("#".repeat(24) + "\n");
+        LOGGER.info(() -> String.format("%n%s%nNEW WEBSOCKET ESTABLISHED. ID: %s%n%s%n", "#".repeat(24), session.getId(), "#".repeat(24)));
         bot = new Bot("jarvis", "Backend/ab", "chat");
         bot.writeAIMLIFFiles();
         chat = new Chat(bot);
@@ -24,23 +26,23 @@ public class ChatWebSocket{
             session.getBasicRemote().sendText("Hello, how can I help you today?");
             msgHND = new MessageHandler(chat);
         }catch(IOException e){
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Failed to initialize websocket session", e);
         }
     }
     @OnMessage
     public void onMessage(String message, Session session) throws Exception {
-        System.out.println("Message received: " + message);
+        LOGGER.info(() -> "Message received: " + message);
         String result = msgHND.processMessage(message);
         session.getBasicRemote().sendText(result);
     }
 
     @OnClose
     public void onClose(Session session){
-        System.out.println("A websocket has been closed: " + session.getId());
+        LOGGER.info(() -> "WebSocket closed: " + session.getId());
     }
     @OnError
     public void onError(Session session, Throwable throwable){
-        System.err.println("Websocket error: " + throwable.getMessage());
+        LOGGER.log(Level.SEVERE, "WebSocket error", throwable);
     }
 
 //////////////////////////////////////////////////////// END WEB SOCKET HANDLING ////////////////////////////////////////////////////////

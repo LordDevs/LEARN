@@ -6,12 +6,16 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.File;
 import java.util.Scanner;
 
 public class WeatherData {
+
+    private static final Logger LOGGER = Logger.getLogger(WeatherData.class.getName());
 
     private static final String apiKey = initializeApiKey();
 
@@ -26,7 +30,7 @@ public class WeatherData {
                 return scanner.nextLine().trim();
             }
         } catch (Exception e) {
-            System.out.println("❌ Não foi possível carregar a API_KEY: " + e.getMessage());
+            LOGGER.log(Level.SEVERE, "Unable to load API_KEY from file.", e);
         }
         return null;
     }
@@ -34,8 +38,8 @@ public class WeatherData {
     private static String initializeApiKey() {
         String key = loadApiKey();
         if (key == null || key.isBlank()) {
-            String message = "API_KEY não encontrada. Configure a variável de ambiente API_KEY ou o arquivo API_KEY.";
-            System.err.println("❌ " + message);
+            String message = "API_KEY not found. Configure the API_KEY environment variable or provide an API_KEY file.";
+            LOGGER.severe(message);
             throw new IllegalStateException(message);
         }
         return key;
@@ -75,7 +79,7 @@ public class WeatherData {
             }
             return this.apiData.getJSONObject("main").getDouble("temp");
         }catch(Exception e){
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Failed to obtain temperature from API data.", e);
             return 0;
         }
     }
@@ -87,7 +91,7 @@ public class WeatherData {
             }
             return this.apiData.getJSONArray("weather").getJSONObject(0).getString("description");
         }catch(Exception e){
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Failed to obtain weather description from API data.", e);
             return null;
         }
     }
@@ -100,10 +104,10 @@ public class WeatherData {
 
        
     
-        if (this.apiData == null || 
-            !this.apiData.has("main") || 
+        if (this.apiData == null ||
+            !this.apiData.has("main") ||
             !this.apiData.has("weather")) {
-            System.out.println("❌ Campos ausentes ou apiData nula.");
+            LOGGER.warning("Missing fields or apiData is null.");
             return String.format("City not found: %s", this.city);
         }
 
@@ -123,7 +127,7 @@ public class WeatherData {
     public JSONObject getAPIdata(){
         try {
             if (this.city == null || this.city.isEmpty()) {
-                System.out.println("❌ City is null or empty!");
+                LOGGER.warning("City is null or empty.");
                 return null;
             }
     
@@ -131,9 +135,9 @@ public class WeatherData {
             String normalized = this.city.trim().toLowerCase();
             String encodedCity = URLEncoder.encode(normalized, StandardCharsets.UTF_8);
     
-            // 🔍 Verificação extra
-            System.out.println("🌍 City requisitada: " + this.city);
-            System.out.println("🌐 URL codificada: " + encodedCity);
+            // Additional logging for debugging requests
+            LOGGER.info(() -> "Requested city: " + this.city);
+            LOGGER.info(() -> "Encoded city parameter: " + encodedCity);
     
             HttpClient client = HttpClient.newHttpClient();
             String url = String.format(
@@ -141,7 +145,7 @@ public class WeatherData {
                 encodedCity, WeatherData.apiKey
             );
     
-            System.out.println("🔗 URL final: " + url); 
+            LOGGER.info(() -> "Final request URL: " + url);
     
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(url))
@@ -149,7 +153,7 @@ public class WeatherData {
                     .build();
 
                 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-                System.out.println("🔎 API Response Body: " + response.body());
+                LOGGER.info(() -> "API response body: " + response.body());
 
             
             /// Analisa a resposta JSON
@@ -184,15 +188,14 @@ public class WeatherData {
         }
 
         if (result == null) {
-    System.out.println("⚠️ Nenhuma previsão próxima foi encontrada!");
-} else {
-    System.out.println("✅ Previsão selecionada: " + result.getString("dt_txt"));
-
+            LOGGER.warning("No nearby forecast was found.");
+        } else {
+            LOGGER.info(() -> "Selected forecast timestamp: " + result.getString("dt_txt"));
         }
 
         return result;
     } catch(Exception e){
-        e.printStackTrace();
+        LOGGER.log(Level.SEVERE, "Failed to fetch API data.", e);
         return null;
     }
   }

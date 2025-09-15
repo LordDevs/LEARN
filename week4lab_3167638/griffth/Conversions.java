@@ -3,7 +3,11 @@
 //3167638
 //worksheetTwo
 
+import java.util.logging.Logger;
+
 public class Conversions {
+
+        private static final Logger LOGGER = Logger.getLogger(Conversions.class.getName());
 
 	public double euroToDollar(double euro) {
 		return euro * 1.18; //07/03/2025 4:42pm
@@ -14,13 +18,13 @@ public class Conversions {
 	}
 
 	public int stringToInteger(String s) { //always put int before stringToInteger to java undertand that it is a integer (except in void methods)
-		 try {
-			return Integer.parseInt(s);
-		 } catch (NumberFormatException e) {
-			System.out.println("bgb");
-			return 123;
-		 }
-		}
+                 try {
+                        return Integer.parseInt(s);
+                 } catch (NumberFormatException e) {
+                        LOGGER.warning(() -> String.format("Unable to parse integer from input '%s'. Returning default value.", s));
+                        return 123;
+                 }
+                }
 		 
 		 public String integerToString(int i) {
 			return Integer.toString(i);
@@ -35,17 +39,17 @@ public class Conversions {
 	public static void main(String[] args) {
 
 		Conversions c = new Conversions();
-		System.out.println(c.euroToDollar(100));
-		System.out.println(c.dollarToEuro(100));
+                LOGGER.info(() -> String.format("100 euros in dollars: %.2f", c.euroToDollar(100)));
+                LOGGER.info(() -> String.format("100 dollars in euros: %.2f", c.dollarToEuro(100)));
 
-		System.out.println(c.stringToInteger("123"));
-		System.out.println(c.stringToInteger("abc"));
+                LOGGER.info(() -> "stringToInteger(\"123\"): " + c.stringToInteger("123"));
+                LOGGER.info(() -> "stringToInteger(\"abc\"): " + c.stringToInteger("abc"));
 
-		System.out.println(c.integerToString(123));//if i put string error comes up
-		System.out.println(c.integerToString(456));//if i put string error comes up
+                LOGGER.info(() -> "integerToString(123): " + c.integerToString(123));//if i put string error comes up
+                LOGGER.info(() -> "integerToString(456): " + c.integerToString(456));//if i put string error comes up
 
-		System.out.println(c.switchCase("abc")); //print abc CHANGING SMALL LETTERS TO BIG LETTER
-		System.out.println(c.switchCase("ABC")); //print ABC
+                LOGGER.info(() -> "switchCase(\"abc\"): " + c.switchCase("abc")); //print abc CHANGING SMALL LETTERS TO BIG LETTER
+                LOGGER.info(() -> "switchCase(\"ABC\"): " + c.switchCase("ABC")); //print ABC
 		
 	}
 }
