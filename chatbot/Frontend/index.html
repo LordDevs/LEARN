@@ -73,6 +73,8 @@
   </div>
 
   <script>
+  const baseUrl = window.location.origin;
+
   async function sendMessage() {
     const input = document.getElementById('chatInput');
     const message = input.value.trim();
@@ -92,7 +94,7 @@
     chatBox.scrollTop = chatBox.scrollHeight;
 
     try {
-      const response = await fetch('http://localhost:8080/chat', {
+      const response = await fetch(`${baseUrl}/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
         body: message
@@ -118,7 +120,7 @@
 
   async function fetchForecast(cityName) {
     try {
-      const response = await fetch('http://localhost:8080/chat', {
+      const response = await fetch(`${baseUrl}/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
         body: `weather:${cityName.toLowerCase()}:today`
