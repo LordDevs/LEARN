@@ -34,8 +34,15 @@ public class ChatUI extends HttpServlet{
 
     // Method to read static file content from Frontend/
     private String getStaticFileContent(String fileName) throws IOException {
-        File file = new File("Frontend/" + fileName);
-        if (file.exists()) {
+        ServletContext context = getServletContext();
+        String realPath = context.getRealPath("/Frontend/" + fileName);
+
+        if (realPath == null) {
+            return null;
+        }
+
+        File file = new File(realPath);
+        if (file.exists() && file.isFile()) {
             StringBuilder content = new StringBuilder();
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String line;
