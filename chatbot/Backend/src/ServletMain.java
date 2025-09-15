@@ -2,6 +2,7 @@
 /// It creates the endpoints for API's
 /// It also creates webSocket
 import java.io.File;
+import java.util.logging.Logger;
 import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.startup.Tomcat;
@@ -11,6 +12,7 @@ import jakarta.websocket.server.ServerContainer;
 import jakarta.websocket.server.ServerEndpointConfig;
 
 public class ServletMain {
+    private static final Logger LOGGER = Logger.getLogger(ServletMain.class.getName());
     public static void main(String[] args) throws Exception {
         Tomcat tomcat = new Tomcat();
         Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
@@ -38,7 +40,7 @@ public class ServletMain {
         ServerContainer wsContainer = (ServerContainer) ctx.getServletContext().getAttribute(ServerContainer.class.getName()); /// Create a container at context
         wsContainer.addEndpoint(ServerEndpointConfig.Builder.create(ChatWebSocket.class, "/chat").build()); /// Add endpoint to that container
 
-        System.out.println("Tomcat server started on port 8080");
+        LOGGER.info("Tomcat server started on port 8080");
         tomcat.getServer().await();
     }
 }
