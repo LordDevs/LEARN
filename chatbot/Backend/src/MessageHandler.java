@@ -17,63 +17,66 @@ public class MessageHandler {
 
     public String processMessage(String message) {
         StringBuilder response;
-        
+
         String botResponse = chat.multisentenceRespond(message);
-        
+        if (botResponse == null) {
+            return "⚠️ I'm having trouble responding right now. Please try again later.";
+        }
+
         // Simula como se o bot tivesse retornado "weather:..."
-    if (message.toLowerCase().startsWith("weather:")) {
-        botResponse = message;
-    }
-
-    if (botResponse.toLowerCase().startsWith("weather:")) {
-        response = new StringBuilder("Forecast for<br>");
-
-        String[] locationDayPairs = botResponse.substring(8).split(",");
-
-        if (locationDayPairs.length > 5) {
-            return "⚠️ Son, five cities is enough to predict the future. Do not rush the time.<br>";
+        if (message.toLowerCase().startsWith("weather:")) {
+            botResponse = message;
         }
 
-        for (String pair : locationDayPairs) {
-            String[] parts = pair.split(":");
-            if (parts.length != 2) {
-                response.append("⚠️ What is this? <strong>")
-                        .append(pair)
-                        .append("</strong>? That’s not how we talk weather here, champ. Use format: <em>city:day</em><br>");
-                continue;
+        if (botResponse.toLowerCase().startsWith("weather:")) {
+            response = new StringBuilder("Forecast for<br>");
+
+            String[] locationDayPairs = botResponse.substring(8).split(",");
+
+            if (locationDayPairs.length > 5) {
+                return "⚠️ Son, five cities is enough to predict the future. Do not rush the time.<br>";
             }
 
-            String location = parts[0].trim();
-            String day = parts[1].trim();
+            for (String pair : locationDayPairs) {
+                String[] parts = pair.split(":");
+                if (parts.length != 2) {
+                    response.append("⚠️ What is this? <strong>")
+                            .append(pair)
+                            .append("</strong>? That’s not how we talk weather here, champ. Use format: <em>city:day</em><br>");
+                    continue;
+                }
 
-            // Converte "today" corretamente
-            Date targetDate = convertDayToDate(day);
+                String location = parts[0].trim();
+                String day = parts[1].trim();
 
-            // Validação de data passada
-            Date today = new Date();
-            if (targetDate.before(today)) {
-                response.append("⚠️ Son, you cannot predict the past. Try again.<br>");
-                continue;
+                // Converte "today" corretamente
+                Date targetDate = convertDayToDate(day);
+
+                // Validação de data passada
+                Date today = new Date();
+                if (targetDate.before(today)) {
+                    response.append("⚠️ Son, you cannot predict the past. Try again.<br>");
+                    continue;
+                }
+
+                // Capitaliza o nome da cidade para buscar corretamente
+                String normalizedCity = location.substring(0, 1).toUpperCase() + location.substring(1).toLowerCase();
+                WeatherData cityWeather = new WeatherData(normalizedCity, targetDate);
+
+                // Formata a data como "Monday, April 7"
+                SimpleDateFormat prettyFormat = new SimpleDateFormat("EEEE, MMMM d");
+                String formattedDate = prettyFormat.format(targetDate);
+
+                // Monta a resposta final
+                response.append(String.format("%s on %s: ", normalizedCity, formattedDate));
+                response.append(cityWeather.genCloth()).append("<br><br>");
             }
 
-            // Capitaliza o nome da cidade para buscar corretamente
-            String normalizedCity = location.substring(0, 1).toUpperCase() + location.substring(1).toLowerCase();
-            WeatherData cityWeather = new WeatherData(normalizedCity, targetDate);
-
-            // Formata a data como "Monday, April 7"
-            SimpleDateFormat prettyFormat = new SimpleDateFormat("EEEE, MMMM d");
-            String formattedDate = prettyFormat.format(targetDate);
-
-            // Monta a resposta final
-            response.append(String.format("%s on %s: ", normalizedCity, formattedDate));
-            response.append(cityWeather.genCloth()).append("<br><br>");
+            return response.toString();
         }
 
-        return response.toString();
+        return botResponse;
     }
-
-    return botResponse.toString();
-}
 
     // Convert day string (e.g., "Monday") to a Date relative to today (April 3, 2025)
     private Date convertDayToDate(String day) {
