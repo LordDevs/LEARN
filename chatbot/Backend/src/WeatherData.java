@@ -13,22 +13,33 @@ import java.util.Scanner;
 
 public class WeatherData {
 
-    static final String API_KEY = "be74631d6c15530aad0e592d5c66b18e";
+    private static final String apiKey = initializeApiKey();
 
     private static String loadApiKey() {
         String envKey = System.getenv("API_KEY");
-    if (envKey != null && !envKey.isEmpty()) return envKey;
-
-    try {
-        Scanner scanner = new Scanner(new File("API_KEY"));
-        if (scanner.hasNextLine()) {
-            return scanner.nextLine().trim();
+        if (envKey != null && !envKey.isEmpty()) {
+            return envKey;
         }
-    } catch (Exception e) {
-        System.out.println("❌ Não foi possível carregar a API_KEY: " + e.getMessage());
+
+        try (Scanner scanner = new Scanner(new File("API_KEY"))) {
+            if (scanner.hasNextLine()) {
+                return scanner.nextLine().trim();
+            }
+        } catch (Exception e) {
+            System.out.println("❌ Não foi possível carregar a API_KEY: " + e.getMessage());
+        }
+        return null;
     }
-    return null;
-}
+
+    private static String initializeApiKey() {
+        String key = loadApiKey();
+        if (key == null || key.isBlank()) {
+            String message = "API_KEY não encontrada. Configure a variável de ambiente API_KEY ou o arquivo API_KEY.";
+            System.err.println("❌ " + message);
+            throw new IllegalStateException(message);
+        }
+        return key;
+    }
     public String city;
     public double temperature;
     public Date date;
@@ -45,11 +56,6 @@ public class WeatherData {
     }
     
     public WeatherData(String city, Date date){
-        this.city = city;
-        this.date = date;
-    }
-    
-    public WeatherData(String city, Date date, String API_KEY){
         this.city = city;
         this.date = date;
     }
@@ -132,7 +138,7 @@ public class WeatherData {
             HttpClient client = HttpClient.newHttpClient();
             String url = String.format(
                 "https://api.openweathermap.org/data/2.5/forecast?q=%s&units=metric&APPID=%s",
-                encodedCity, WeatherData.API_KEY
+                encodedCity, WeatherData.apiKey
             );
     
             System.out.println("🔗 URL final: " + url); 
