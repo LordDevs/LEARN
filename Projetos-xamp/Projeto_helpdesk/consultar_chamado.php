@@ -1,105 +1,53 @@
-<?php require_once "validador_acesso.php" ?>
-
 <?php
+declare(strict_types=1);
 
-  //chamados
-  $chamados = array();
+require_once __DIR__ . '/validador_acesso.php';
+require_once __DIR__ . '/includes/security.php';
 
-  //abrir o arquivo.hd
-  $arquivo = fopen('../../app_help_desk/arquivo.hd', 'r');
-
-  //enquanto houver registros (linhas) a serem recuperados
-  while(!feof($arquivo)) { //testa pelo fim de um arquivo
-    //linhas  
-    $registro = fgets($arquivo);
-    $chamados[] = $registro;
-  }
-
-  //fechar o arquivo aberto
-  fclose($arquivo);
-  
+$csrfToken = getCsrfToken();
 ?>
-
-<html>
+<!doctype html>
+<html lang="pt-BR">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>App Help Desk</title>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <style>
-      .card-consultar-chamado {
-        padding: 30px 0 0 0;
-        width: 100%;
-        margin: 0 auto;
-      }
-    </style>
+    <meta name="csrf-token" content="<?=htmlspecialchars($csrfToken, ENT_QUOTES)?>">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   </head>
-
-  <body>
-
+  <body class="bg-light">
     <nav class="navbar navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">
-        <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-        App Help Desk
-      </a>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="logoff.php">SAIR</a>
-        </li>
-      </ul>
+      <div class="container d-flex justify-content-between">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="home.php">
+          <img src="imagens/logo.png" width="32" height="32" alt="Logotipo">
+          <span>App Help Desk</span>
+        </a>
+        <div>
+          <a class="btn btn-outline-light btn-sm" href="logoff.php">Sair</a>
+        </div>
+      </div>
     </nav>
 
-    <div class="container">    
-      <div class="row">
-
-        <div class="card-consultar-chamado">
-          <div class="card">
-            <div class="card-header">
-              Consulta de chamado
-            </div>
-            
-            <div class="card-body">
-
-              <?php foreach($chamados as $chamado) { ?>
-              
-                <?php
-
-                  $chamado_dados = explode('#', $chamado);
-
-                  //
-                  if($_SESSION['perfil_id'] == 2) {
-                    //só vamos exibir o chamado, se ele foi criado pelo usuário
-                    if($_SESSION['id'] != $chamado_dados[0]) {
-                      continue;
-                    }
-                  }
-
-                  if(count($chamado_dados) < 3) {
-                    continue;
-                  }
-
-                ?>
-                <div class="card mb-3 bg-light">
-                  <div class="card-body">
-                    <h5 class="card-title"><?=$chamado_dados[1]?></h5>
-                    <h6 class="card-subtitle mb-2 text-muted"><?=$chamado_dados[2]?></h6>
-                    <p class="card-text"><?=$chamado_dados[3]?></p>
-
-                  </div>
-                </div>
-
-              <?php } ?>
-
-              <div class="row mt-5">
-                <div class="col-6">
-                  <a class="btn btn-lg btn-warning btn-block" href="home.php">Voltar</a>
-                </div>
+    <main class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-12 col-xl-10">
+          <div class="card shadow-sm">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span>Consulta de chamados</span>
+              <div class="d-flex gap-2">
+                <a class="btn btn-outline-secondary btn-sm" href="home.php">Voltar</a>
+                <button class="btn btn-outline-primary btn-sm" type="button" data-ticket-refresh>Atualizar</button>
               </div>
+            </div>
+            <div class="card-body" data-ticket-list>
+              <p class="text-muted mb-0">Carregando chamados...</p>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
+    <script src="assets/js/tickets.js" defer></script>
   </body>
 </html>

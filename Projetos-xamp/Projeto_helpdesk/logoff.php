@@ -1,33 +1,18 @@
 <?php
+declare(strict_types=1);
 
-	session_start();
+require_once __DIR__ . '/includes/security.php';
 
-	/*
-	echo '<pre>';
-	print_r($_SESSION);
-	echo '</pre>';
+ensureSessionStarted();
 
-	//remover índices do array de sessão
-	//unset()
+$_SESSION = [];
 
-	unset($_SESSION['x']); //para remover o índice apenas se existir
+if (ini_get('session.use_cookies')) {
+    $params = session_get_cookie_params();
+    setcookie(session_name(), '', time() - 42000, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
+}
 
-	echo '<pre>';
-	print_r($_SESSION);
-	echo '</pre>';
+session_destroy();
 
-	//destruir a variável de sessão
-	//session_destroy()
-
-	session_destroy(); //será destruída
-	//forçar um redirecionamento
-
-	echo '<pre>';
-	print_r($_SESSION);
-	echo '</pre>';
-	*/
-
-	session_destroy();
-	header('Location: index.php');
-
-?>
+header('Location: index.php');
+exit;

@@ -1,8 +1,6 @@
 <?php
-  session_start();
+declare(strict_types=1);
 
-  if(!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM') {
-    header('Location: index.php?login=erro2');
-  }
+require_once __DIR__ . '/includes/auth.php';
 
-?>
+requireAuthentication();
