@@ -1,162 +1,163 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!--Normalize CSS-->
-	<link rel="stylesheet" type="text/css" href="css/normalize.css">
-
-	<!--Estilo customizado-->
-	<link rel="stylesheet" type="text/css" href="estilo/estilo.css">
-
-	<!--[if lt IE 9]>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-	<![endif]-->
-
-	<title>Museu Nacional</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Museu Nacional</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="estilo/estilo.css">
 </head>
-
 <body>
-
-	<div id="container"><!--inicio container-->
-		<header><!--inicio header-->
-			<div id="logo">
-				<h1><a href="">Museu Nacional</a></h1>
-			</div>
-		
-
-		<nav><!-- inicio nav-->
-			<ul>
-				<li><a href="#">Home</a></li>
-				<li><a href="#">Exposições</a></li>
-				<li><a href="#">Pesquisa</a></li>
-				<li><a href="#">Acervo</a></li>
-				<li><a href="#">Videos</a></li>
-				<li><a href="#">Fotos</a></li>
-				<li><a href="#">Contato</a></li>
-			</ul>
-		</nav>--><!--fim nav-->
-		</header><!--fim header-->
-
-		<div id="principal"><!--inicio principal-->
-			<div id="conteudo"><!--inicio conteudo-->
-				<section id="capa">
-					<img src="imagens/museu.png">
-				</section>
-
-				<section id="postagem">
-					<article id="video">
-						<h3>Video: Conheça o museu</h3>
-						<iframe width="310" height="170" src="https://www.youtube.com/embed/RGUYb-hivrc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-					</article>
-
-					<article id="mapa">
-						<h3>Mapa: encontre o museu</h3>
-						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3183.450653942085!2d22.424097215526313!3d37.070572260132614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1361d27441109fcf%3A0x44db527d3042ef91!2sMuseum%20of%20the%20Olive%20and%20Greek%20Olive%20Oil!5e0!3m2!1spt-BR!2sbr!4v1641952056434!5m2!1spt-BR!2sbr" width="310" height="170" style="border:0;" allowfullscreen="" loading="lazy"></iframe>						
-					</article>
-
-					<article id="exposicoes">
-						<h3>Exposicoes</h3>
-						<ul>
-							<li>
-								<a href="#">Os assustadores inseto</a>
-							</li>
-						
-							<li>
-								<a href="#">O cranio de luzia, a mulher mais antiga do Brasil</a>
-							</li>
-							<li>
-								<a href="#">Preguica gigante e tigre-dentes-de-sabre</a>
-							</li>
-							<li>
-								<a href="#">Plantas do Brasil Central</a>
-							</li>
-							<li>
-								<a href="#">Teresa Cristina: a Imperatriz arqueologa</a>
-							</li>
-														<li>
-								<a href="#">arte com Dinossauros - Paleoarte</a>
-							</li>
-							<li>
-								<a href="#"><strong>Veja todos (65)</strong></a>
-							</li>
-						</ul>
-					</article>
-
-					<article id="historia">
-						<h3>200 anos de historia</h3>
-						<p>A expressão Lorem ipsum em design gráfico e editoração é um texto padrão em latim utilizado na produção gráfica para preencher os espaços de texto em publicações para testar e ajustar aspectos visuais antes de utilizar conteúdo real.
-						</p>
-						<a href=""><strong>Leia Mais</strong></a>
-					</article>
-				</section>
-
-			</div><!--fim conteudo-->
-
-			<aside>
-				<section id="depoimento">
-					<img src="imagens/depoimento.png">
-				</section>
-
-				<section id="visita"> <!--Inicio Visita-->
-					<h4>Faca uma visita</h4>
-					<form>
-						<fieldset>
-							<legend>Selecione uma data</legend>
-
-							<label for="data">Data</label>
-							<input class="campo" type="text" id="data" value="dd/mm/aaaa">
-
-							<label for="qtd">Qtd pessoas</label>
-							<input class="campo" style="width: 30px" type="text" id="qtd" value="1">							
-						</fieldset>
-
-						<input class="botao" type="submit" value="Verificar disponibilidade">
-					</form>
-				</section><!--fim Visita-->
-
-				<section id="galeria"><!--Inicio galeria-->
-					<h4>Galeria de fotos</h4>
-
-					<a href="">
-						<img src="imagens/imagem1.jpg" height="93" width="93" alt="Descricao imagem">
-					</a>
-
-					<a href="">
-						<img src="imagens/imagem2.jpg" height="93" width="93"
-						alt="Descricao imagem">
-					</a>
-
-					<a href="">
-						<img src="imagens/imagem3.jpg" height="93" width="93"
-						alt="Descricao imagem">
-					</a>
-
-					<a href="">
-						<img src="imagens/imagem4.jpg" height="93" width="93"
-						alt="Descricao imagem">
-					</a>
-					
-				</section><!--fim galeria-->
-			</aside>
-
-			<footer>
-				<p>
-					<a href="">Home</a>
-					<a href="">Exposicoes</a>
-					<a href="">Pesquisa</a>
-					<a href="">Acervo</a>
-					<a href="">Videos</a>
-					<a href="">Fotos</a>
-					<a href="">Contato</a>
-				</p>
-				<p>2021 <a href="">Museu Nacional</a> - Todos os direitos reservados</p>
-			</footer>
-		</div><!--fim principal-->
-
-	</div><!--fim container-->
-		
-
-
+    <a class="skip-link" href="#conteudo-principal">Ir para o conteúdo principal</a>
+    <div class="page">
+        <header class="site-header" role="banner">
+            <div class="branding">
+                <a class="branding__link" href="#" aria-label="Museu Nacional">
+                    <span class="branding__text" aria-hidden="true">Museu Nacional</span>
+                </a>
+            </div>
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+                <span class="menu-toggle__label">Menu</span>
+                <span class="menu-toggle__icon" aria-hidden="true"></span>
+            </button>
+            <nav id="site-navigation" class="site-nav" aria-label="Navegação principal" data-open="false">
+                <ul class="site-nav__list">
+                    <li class="site-nav__item"><a href="#" aria-current="page">Home</a></li>
+                    <li class="site-nav__item"><a href="#exposicoes">Exposições</a></li>
+                    <li class="site-nav__item"><a href="#">Pesquisa</a></li>
+                    <li class="site-nav__item"><a href="#">Acervo</a></li>
+                    <li class="site-nav__item"><a href="#video">Vídeos</a></li>
+                    <li class="site-nav__item"><a href="#galeria">Fotos</a></li>
+                    <li class="site-nav__item"><a href="#visita">Contato</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main id="conteudo-principal" class="site-main" role="main">
+            <div class="main-layout">
+                <div class="content-column">
+                    <section class="hero" aria-labelledby="hero-heading">
+                        <div class="hero__media">
+                            <img src="imagens/museu.png"
+                                 srcset="imagens/museu.png 640w, imagens/museu.png 1080w"
+                                 sizes="(max-width: 600px) 100vw, (max-width: 1024px) 70vw, 55vw"
+                                 alt="Vista externa do Museu Nacional">
+                        </div>
+                        <div class="hero__content">
+                            <h1 id="hero-heading">Museu Nacional</h1>
+                            <p>Com mais de dois séculos de história, o Museu Nacional preserva um dos acervos científicos e culturais mais importantes do Brasil.</p>
+                            <p>Acompanhe exposições, pesquisas e atividades educativas que conectam ciência, memória e arte a visitantes de todas as idades.</p>
+                        </div>
+                    </section>
+                    <section class="highlights" aria-labelledby="destaques-heading">
+                        <div class="section-heading">
+                            <h2 id="destaques-heading">Destaques</h2>
+                            <p>Planeje sua visita com o melhor do nosso conteúdo digital e presencial.</p>
+                        </div>
+                        <div class="highlights__grid">
+                            <article class="card" id="video" aria-labelledby="video-heading">
+                                <h3 id="video-heading">Vídeo: conheça o museu</h3>
+                                <div class="embed">
+                                    <iframe src="https://www.youtube.com/embed/RGUYb-hivrc" title="Vídeo institucional do Museu Nacional" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                            </article>
+                            <article class="card" id="mapa" aria-labelledby="mapa-heading">
+                                <h3 id="mapa-heading">Mapa: encontre o museu</h3>
+                                <div class="embed">
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3183.450653942085!2d22.424097215526313!3d37.070572260132614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1361d27441109fcf%3A0x44db527d3042ef91!2sMuseum%20of%20the%20Olive%20and%20Greek%20Olive%20Oil!5e0!3m2!1spt-BR!2sbr!4v1641952056434!5m2!1spt-BR!2sbr"
+                                            title="Localização do Museu Nacional no mapa" loading="lazy" allowfullscreen=""></iframe>
+                                </div>
+                            </article>
+                            <article class="card" id="exposicoes" aria-labelledby="exposicoes-heading">
+                                <h3 id="exposicoes-heading">Exposições</h3>
+                                <ul class="feature-list">
+                                    <li><a href="#">Os assustadores insetos</a></li>
+                                    <li><a href="#">O crânio de Luzia, a mulher mais antiga do Brasil</a></li>
+                                    <li><a href="#">Preguiça gigante e tigre-dente-de-sabre</a></li>
+                                    <li><a href="#">Plantas do Brasil Central</a></li>
+                                    <li><a href="#">Teresa Cristina: a imperatriz arqueóloga</a></li>
+                                    <li><a href="#">Arte com dinossauros &mdash; Paleoarte</a></li>
+                                    <li><a href="#"><strong>Veja todos (65)</strong></a></li>
+                                </ul>
+                            </article>
+                            <article class="card" id="historia" aria-labelledby="historia-heading">
+                                <h3 id="historia-heading">200 anos de história</h3>
+                                <p>A expressão Lorem ipsum em design gráfico e editoração é um texto padrão em latim utilizado na produção gráfica para preencher espaços em publicações e ajustar aspectos visuais antes de utilizar conteúdo real.</p>
+                                <a class="card__link" href="#">Leia mais sobre nossa trajetória</a>
+                            </article>
+                        </div>
+                    </section>
+                </div>
+                <aside class="sidebar" aria-labelledby="sidebar-heading">
+                    <h2 class="sidebar__title" id="sidebar-heading">Planeje sua visita</h2>
+                    <section class="testimonial" aria-labelledby="testimonial-heading">
+                        <h3 class="visually-hidden" id="testimonial-heading">Depoimento de visitante</h3>
+                        <img src="imagens/depoimento.png" alt="Depoimento de visitante satisfeito" loading="lazy">
+                    </section>
+                    <section class="visit" id="visita" aria-labelledby="visita-heading">
+                        <h3 id="visita-heading">Faça uma visita</h3>
+                        <form id="visit-form" class="visit-form" aria-describedby="visit-feedback" novalidate>
+                            <fieldset class="visit-form__fieldset">
+                                <legend>Selecione uma data</legend>
+                                <div class="form-group">
+                                    <label for="visit-date">Data</label>
+                                    <input type="text" id="visit-date" name="date" placeholder="dd/mm/aaaa" inputmode="numeric" autocomplete="off" required pattern="\d{2}/\d{2}/\d{4}" aria-describedby="visit-date-hint visit-feedback">
+                                    <span class="form-hint" id="visit-date-hint">Informe a data no formato dia/mês/ano.</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="visit-quantity">Quantidade de pessoas</label>
+                                    <input type="number" id="visit-quantity" name="quantity" min="1" max="10" value="1" required aria-describedby="visit-quantity-hint visit-feedback">
+                                    <span class="form-hint" id="visit-quantity-hint">Até 10 visitantes por agendamento.</span>
+                                </div>
+                            </fieldset>
+                            <div class="form-actions">
+                                <button type="submit" class="button">Verificar disponibilidade</button>
+                            </div>
+                            <p id="visit-feedback" class="form-feedback" role="alert" aria-live="assertive" hidden></p>
+                        </form>
+                    </section>
+                    <section class="gallery" id="galeria" aria-labelledby="gallery-heading">
+                        <h3 id="gallery-heading">Galeria de fotos</h3>
+                        <ul class="gallery__list">
+                            <li class="gallery__item">
+                                <figure class="gallery__figure">
+                                    <img src="imagens/imagem1.jpg" srcset="imagens/imagem1.jpg 320w, imagens/imagem1.jpg 640w" sizes="(max-width: 600px) 45vw, 140px" alt="Detalhe da fachada histórica do Museu Nacional" loading="lazy">
+                                </figure>
+                            </li>
+                            <li class="gallery__item">
+                                <figure class="gallery__figure">
+                                    <img src="imagens/imagem2.jpg" srcset="imagens/imagem2.jpg 320w, imagens/imagem2.jpg 640w" sizes="(max-width: 600px) 45vw, 140px" alt="Artefatos científicos em exposição permanente" loading="lazy">
+                                </figure>
+                            </li>
+                            <li class="gallery__item">
+                                <figure class="gallery__figure">
+                                    <img src="imagens/imagem3.jpg" srcset="imagens/imagem3.jpg 320w, imagens/imagem3.jpg 640w" sizes="(max-width: 600px) 45vw, 140px" alt="Sala expositiva iluminada do Museu Nacional" loading="lazy">
+                                </figure>
+                            </li>
+                            <li class="gallery__item">
+                                <figure class="gallery__figure">
+                                    <img src="imagens/imagem4.jpg" srcset="imagens/imagem4.jpg 320w, imagens/imagem4.jpg 640w" sizes="(max-width: 600px) 45vw, 140px" alt="Peças do acervo naturalista em destaque" loading="lazy">
+                                </figure>
+                            </li>
+                        </ul>
+                    </section>
+                </aside>
+            </div>
+        </main>
+        <footer class="site-footer" role="contentinfo">
+            <nav class="footer-nav" aria-label="Navegação complementar">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#exposicoes">Exposições</a></li>
+                    <li><a href="#">Pesquisa</a></li>
+                    <li><a href="#">Acervo</a></li>
+                    <li><a href="#video">Vídeos</a></li>
+                    <li><a href="#galeria">Fotos</a></li>
+                    <li><a href="#visita">Contato</a></li>
+                </ul>
+            </nav>
+            <p>2021 <a href="#">Museu Nacional</a> — Todos os direitos reservados.</p>
+        </footer>
+    </div>
+    <script src="scripts/main.js" defer></script>
 </body>
 </html>
