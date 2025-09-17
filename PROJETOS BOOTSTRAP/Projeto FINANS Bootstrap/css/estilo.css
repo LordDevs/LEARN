@@ -1,13 +1,20 @@
 #home {
-	background: #ffc107;
-	color: white;
+  background: var(--bs-warning);
+  color: var(--bs-emphasis-color);
 }
 
 .caixa {
-	padding: 60px 0;
-	border-bottom: 1px solid #e5e5e5;
+  padding: 60px 0;
+  border-bottom: 1px solid var(--bs-border-color);
 }
 
-footer p a {
-	margin: 5px 15px;
+footer a {
+  color: inherit;
+  transition: color 0.2s ease-in-out;
+}
+
+footer a:hover,
+footer a:focus {
+  color: var(--bs-emphasis-color);
+  text-decoration: none;
 }
