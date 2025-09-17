@@ -1,131 +1,124 @@
-		<!DOCTYPE html>
-		<html>
-		<head>
-			<meta charset="utf-8">
-			<meta name="viewport" content="width=device-width, initial-scale=1">
-			<title>Parallax</title>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Parallax</title>
+    <link rel="stylesheet" href="parallax.css">
+</head>
+<body>
+    <header class="parallax-section observe-fade" data-background="imagens/imagem1.jpg">
+        <div class="section-title">
+            <h1>Passeio de Balões</h1>
+        </div>
+    </header>
+    <main>
+        <section class="text-block observe-fade">
+            <h2>Experimente o efeito parallax</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis, condimentum arcu in, sodales ligula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis, condimentum arcu in, sodales ligula.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis, condimentum arcu in, sodales ligula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis, condimentum arcu in, sodales ligula.</p>
+        </section>
+        <section class="parallax-section observe-fade" data-background="imagens/imagem2.jpg">
+            <div class="section-title">
+                <h2>Pegando a Estrada</h2>
+            </div>
+        </section>
+        <section class="text-block observe-fade">
+            <h2>Viaje em movimento</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis, condimentum arcu in, sodales ligula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis, condimentum arcu in, sodales ligula.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis, condimentum arcu in, sodales ligula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis, condimentum arcu in, sodales ligula.</p>
+        </section>
+        <section class="parallax-section observe-fade" data-background="imagens/imagem3.jpg">
+            <div class="section-title">
+                <h2>Pôr do Sol</h2>
+            </div>
+        </section>
+        <section class="parallax-section observe-fade" data-background="imagens/imagem4.jpg">
+            <div class="section-title">
+                <h2>Montanhas</h2>
+            </div>
+        </section>
+    </main>
+    <noscript>
+        <style>
+            .parallax-section[data-background="imagens/imagem1.jpg"] {
+                background-image: url("imagens/imagem1.jpg");
+            }
+            .parallax-section[data-background="imagens/imagem2.jpg"] {
+                background-image: url("imagens/imagem2.jpg");
+            }
+            .parallax-section[data-background="imagens/imagem3.jpg"] {
+                background-image: url("imagens/imagem3.jpg");
+            }
+            .parallax-section[data-background="imagens/imagem4.jpg"] {
+                background-image: url("imagens/imagem4.jpg");
+            }
+        </style>
+    </noscript>
+    <script>
+        (function () {
+            const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+            const reduceMotion = mediaQuery.matches;
+            const parallaxSections = document.querySelectorAll('.parallax-section');
+            const animatedSections = document.querySelectorAll('.observe-fade');
 
-			<style type="text/css">
-/*configuracao padrao texto*/
-				body, html {
-					margin: 0;
-					font: 16px "lato", sans-serif;
-					color: #777;
-					height: 100%;
-				}
+            const reveal = (element) => {
+                element.classList.add('is-visible');
+            };
 
-				.conteudo {
-					color: #777;
-					background-color: white;
-					text-align: justify;
-					padding: 50px 80px;
-				}
+            const loadBackground = (section) => {
+                const background = section.dataset.background;
+                if (background && !section.dataset.loaded) {
+                    section.style.backgroundImage = `url("${background}")`;
+                    section.dataset.loaded = 'true';
+                }
+            };
 
-				h3 {
-					text-transform: uppercase;
-					color: #111;
-					text-align: center;
-				}
+            if ('IntersectionObserver' in window) {
+                const backgroundObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            loadBackground(entry.target);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { rootMargin: '200px 0px' });
 
+                parallaxSections.forEach((section) => backgroundObserver.observe(section));
 
-				a {
-					margin-bottom: 20px;
-				}
+                if (!reduceMotion) {
+                    const animationObserver = new IntersectionObserver((entries, observer) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                reveal(entry.target);
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, { threshold: 0.2 });
 
-/*efeito paralax*/
-				
-				.caixa1, .caixa2, .caixa3, .caixa4  {
+                    animatedSections.forEach((section) => animationObserver.observe(section));
+                } else {
+                    animatedSections.forEach(reveal);
+                }
 
-					position: relative;
-					height: 100%;
-					background-repeat: no-repeat;
-					background-size: cover;
-					background-position: center;
-					background-attachment: fixed;
-				}
-
-				.caixa1 {
-					background-image: url(imagens/imagem1.jpg);
-
-				}
-
-				.caixa2 {
-					background-image: url(imagens/imagem2.jpg);
-				}
-
-				.caixa3 {
-					background-image: url(imagens/imagem3.jpg);
-				}
-
-				.caixa4 {
-					background-image: url(imagens/imagem4.jpg);
-				}
-
-				.conteudo-titulo {
-					position: absolute;
-					left: 0%;
-					top: 44%;
-					width: 100%;
-					text-align: center;
-				}
-
-				.conteudo-titulo span.titulo{
-					color: #fff;
-					background-color: #111;
-					font-size: 25px;
-					padding: 18px;
-					letter-spacing: 5px;
-					text-transform: uppercase;
-				}
-
-			</style>
-
-		</head>
-		<body>
-			<div class="caixa1">
-				<div class="conteudo-titulo">
-					<span class="titulo">Passeio de Baloes</span>
-				</div>
-			</div>
-
-			<div class="conteudo">
-				<h3>Parallax</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis, condimentum arcu in, sodales ligula.
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis,
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis, condimentum arcu in, sodales ligula.
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis, condimentum arcu in, sodales ligula.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis, condimentum arcu in, sodales ligula.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis, condimentum arcu in, sodales ligula.
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis,
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis, condimentum arcu in, sodales ligula.</p>
-			</div>
-
-			<div class="caixa2">
-				<div class="conteudo-titulo">
-					<span class="titulo">Pegando a Estrada</span>
-				</div>
-			</div>
-			<div class="conteudo">
-				<h3>Parallax2</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis, condimentum arcu in, sodales ligula.
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis,
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis, condimentum arcu in, sodales ligula.
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis, condimentum arcu in, sodales ligula.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis, condimentum arcu in, sodales ligula.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis, condimentum arcu in, sodales ligula.
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis,
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id congue velit, in cursus augue. Morbi vel orci mattis, condimentum arcu in, sodales ligula.</p>
-			</div>
-
-			<div class="caixa3">
-				<div class="conteudo-titulo">
-					<span class="titulo">Por do sol</span>
-				</div>
-			</div>
-
-			<div class="caixa4">
-				<div class="conteudo-titulo">
-					<span class="titulo">Montanhas</span>
-				</div>
-			</div>
-
-		</body>
-		</html>
+                if (typeof mediaQuery.addEventListener === 'function') {
+                    mediaQuery.addEventListener('change', (event) => {
+                        if (event.matches) {
+                            animatedSections.forEach(reveal);
+                        }
+                    });
+                } else if (typeof mediaQuery.addListener === 'function') {
+                    mediaQuery.addListener((event) => {
+                        if (event.matches) {
+                            animatedSections.forEach(reveal);
+                        }
+                    });
+                }
+            } else {
+                parallaxSections.forEach(loadBackground);
+                animatedSections.forEach(reveal);
+            }
+        })();
+    </script>
+</body>
+</html>
