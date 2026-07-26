@@ -1,12 +1,7 @@
-## Chatbot Project
-## Participants: Emmanuel, Michel and Celso.
-# General Chatbot Feature Checkboxes
-- [x] Text-Based Responses
-- [X] AIML Support
-- [X] Predefined Responses
-- [X] UI Prototype
-- [ ] Unit Testing
-- [ ] Learning mode
-- [ ] Voice Input/Output
-- [ ] Buttons/Quick Reply Options
-- [ ] Typing Indicators
+# Chatbot (moved)
+
+The chatbot that lived in this folder has been migrated and remodeled as **Chronos-200K**.
+
+**Canonical repository:** https://github.com/LordDevs/Chronos-200K
+
+This directory is kept only as a pointer so old links do not look like an active duplicate codebase. Historical commits under `chatbot/` remain in this repo's Git history.
